@@ -9,10 +9,12 @@ class dummy_chatbot:
         self.query = ask_query
     
     def _get_ID(self):
-        os.environ['OPENAI_API_KEY'] = "your key"
-        # ssm = boto3.client('ssm',  region_name="ap-northeast-2")
-        # parameter = ssm.get_parameter(Name='/TEST/CICD/OPEN_API_KEY', WithDecryption=True)
-        # os.environ['OPENAI_API_KEY'] = parameter['Parameter']['Value']
+        OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY', None)
+        if not OPENAI_API_KEY:
+            print("get PARAM store")
+            ssm = boto3.client('ssm')
+            parameter = ssm.get_parameter(Name='/TEST/CICD/OPENAI_API_KEY', WithDecryption=True)
+            os.environ['OPENAI_API_KEY'] = parameter['Parameter']['Value']
         
 
     def _get_client(self):
