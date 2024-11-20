@@ -32,10 +32,6 @@ Thumbs.db
 *.sqlite
 *.sqlite3
 
-# Docker 관련
-Dockerfile
-docker-compose.yml
-*.env.docker
 
 # FastAPI와 관련된 파일
 uvicorn.log

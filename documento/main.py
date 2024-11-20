@@ -2,7 +2,8 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import Optional
 from utils.test import validate_item_exists, generate_new_id
-
+from typing import Union
+from utils.test_chatbot import dummy_chatbot
 # FastAPI 앱 생성
 app = FastAPI(
     title="Vue.js Integration Backend",
@@ -29,6 +30,11 @@ fake_db = {}
 async def root():
     return {"message": "Hello World"}
 
+@app.get("/ask")
+def read_item(ask_query: str):
+    chatbot = dummy_chatbot(ask_query)  # 클래스 인스턴스 생성
+    answer = chatbot.reuturn_ANS()  # 인스턴스 메서드 호출
+    return {"answer": answer}
 
 # 1. GET - 데이터 조회
 @app.get("/items/{item_id}")

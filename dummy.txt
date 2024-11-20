@@ -1,0 +1,10 @@
+git status
+git add .
+git commit -m "수정된 코드 업로드: 주요 변경 사항 설명"
+git push origin backend
+
+git checkout main
+git pull origin main
+git merge backend
+
+git push origin main
