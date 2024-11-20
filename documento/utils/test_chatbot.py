@@ -9,9 +9,11 @@ class dummy_chatbot:
         self.query = ask_query
     
     def _get_ID(self):
-        ssm = boto3.client('ssm')
-        parameter = ssm.get_parameter(Name='/TEST/CICD/OPEN_API_KEY', WithDecryption=True)
-        os.environ['OPENAI_API_KEY'] = parameter['Parameter']['Value']
+        os.environ['OPENAI_API_KEY'] = "your key"
+        # ssm = boto3.client('ssm',  region_name="ap-northeast-2")
+        # parameter = ssm.get_parameter(Name='/TEST/CICD/OPEN_API_KEY', WithDecryption=True)
+        # os.environ['OPENAI_API_KEY'] = parameter['Parameter']['Value']
+        
 
     def _get_client(self):
         return OpenAI()
