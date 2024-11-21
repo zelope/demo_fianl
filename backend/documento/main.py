@@ -4,12 +4,30 @@ from typing import Optional
 from utils.test import validate_item_exists, generate_new_id
 from typing import Union
 from utils.test_chatbot import dummy_chatbot
+from fastapi.middleware.cors import CORSMiddleware
+
+
 # FastAPI 앱 생성
 app = FastAPI(
     title="Vue.js Integration Backend",
-    description="This FastAPI server acts as the backend for a Vue.js frontend.",
-    version="1.0.0"
+    description="add CORS code",
+    version="1.1.0"
 )
+
+origins = [
+    "https://example.com",  # Route 53 연결된 도메인
+    "http://localhost:8000"  # 로컬 개발 환경 (테스트용)
+]
+
+# CORS 설정 추가
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],  # GET, POST, PUT, DELETE, PATCH 등 모두 허용
+    allow_headers=["*"],  # 모든 헤더 허용
+)
+
 
 # 데이터 모델 정의 (Pydantic)
 class Item(BaseModel):
